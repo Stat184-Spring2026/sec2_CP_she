@@ -1,6 +1,6 @@
 # Boston Marathon Dataset
 
-This repository is for the 2023 Boston Marathon runners that looks at the marathon results. 
+This repository is for the 2023 Boston Marathon runners that takes a closer look at the marathon results. 
 
 ## Overview
 
