@@ -40,11 +40,11 @@ The following checklist provides your team with an expanded listing of all eleme
 - [x] Complete Checkpoint #1 and make a team contract.
 - [ ] Create (and update) a detailed plan for your project.
   - [ ] Place a copy of your plan in your repo.
-- [ ] Brainstorm what you're interested in exploring and look for potential data sources. (See the [Data and Topics](#data-and-topics) for resources.)
-- [ ] Locate appropriate data sources for your project. See the [Data Requirements](#data-requirements) section for important restrictions.
-- [ ] Create a repo using the template repo. Name your repo `Sec#_CP_Name1_Name2_Name3` where `Sec#` is your section of Stat184 (i.e., `Sec1`, `Sec2`, `Sec4`, or `Sec5`) and `Name#` is replaced with the names of each team member.
-  - [ ] The owner of the repo should be `Stat184-Spring2026`. 
-  - [ ] Make sure that each team member has access to the repo.
+- [x] Brainstorm what you're interested in exploring and look for potential data sources. (See the [Data and Topics](#data-and-topics) for resources.)
+- [x] Locate appropriate data sources for your project. See the [Data Requirements](#data-requirements) section for important restrictions.
+- [x] Create a repo using the template repo. Name your repo `Sec#_CP_Name1_Name2_Name3` where `Sec#` is your section of Stat184 (i.e., `Sec1`, `Sec2`, `Sec4`, or `Sec5`) and `Name#` is replaced with the names of each team member.
+  - [x] The owner of the repo should be `Stat184-Spring2026`. 
+  - [x] Make sure that each team member has access to the repo.
 - [ ] Use GitHub appropriately.
   - [ ] Have a proper README file for the repo.
   - [ ] Each member must have at least five (5) commits with appropriate subjects/messages.
