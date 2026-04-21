@@ -4,9 +4,7 @@ This repository is for the 2023 Boston Marathon runners that takes a closer look
 
 ## Overview
 
-The purpose of this project is to clean, wrangle, and analyze the 2023 Boston marathon runners dataset. It will demonstrate all of the R/R studio skills we have learned throughout the course and put it into a real world context. 
-
-Expand on those introductory sentences with a brief but informative description of your project's purpose and goals. This section should help visitors decide whether they should dig deeper into your repo/project.
+The purpose of this project is to clean, wrangle, and analyze the 2023 Boston marathon runners dataset. It will demonstrate all of the R and R studio skills we have learned throughout the course and put it into a real world context. We will be conducting exploratory Data Analysis, while posing and answering your own research question(s). The main goal is to transform the raw marathon result into a structured and interpretable dataset to examine meaningful patterns in the runner's performances, demographics, and race results. 
 
 ### Interesting Insight (Optional)
 
