@@ -20,8 +20,7 @@ Our plan is to examine runner's performances, demogrpahics, and race results by 
 
 ## Repo Structure
 
-Use this section to explain the structure of your repo. This should help visitors quickly figure out where they should look to find certain elements. Further, you can use this space to highlight and briefly explain important/key files in the repo.
-
+The repo structure is inclusive of our README.md, the Boston Marathon 2023 dataset csv, our BostonMarathon2023 code for the tables and plots, as well as the quarto PDF file and QMD file in R. 
 
 ## Authors
 The authors are Shreya Chandanshive (svc6521@psu.edu), Eszter Badescu (efb5578@psu.edu), and Helly Patel (hbp5251@psu.edu). For any questions, please feel free to send us an email at the addresses listed!
