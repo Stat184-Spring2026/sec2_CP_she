@@ -8,7 +8,7 @@ The purpose of this project is to clean, wrangle, and analyze the 2023 Boston ma
 
 ### Interesting Insight (Optional)
 
-This is optional but highly recommended. You'll include one interesting insight from your project as part of the README. This insight is most effective when you include a visual. Keep in mind that this visual must be included as an image file (e.g., JPG, PNG, etc.). You can export plots created with `{ggplot2}` by using the function `ggsave`.
+<img width="169" height="319" alt="Screenshot 2026-04-23 at 16 30 29" src="https://github.com/user-attachments/assets/faac1836-2b0f-43ae-803f-975d14d22eb5" />
 
 ## Data Sources and Acknowledgements
 
