@@ -6,8 +6,8 @@ This repository is for the 2023 Boston Marathon runners that takes a closer look
 
 The purpose of this project is to clean, wrangle, and analyze the 2023 Boston marathon runners dataset. Demonstrating all of the R and RStudio skills we have learned throughout the course and put it into a real world context. We will be conducting exploratory Data Analysis, while posing and answering our own research question(s). The main goal is to transform the raw marathon result into a structured and interpretable dataset to examine meaningful patterns and comparisons in the runner's performances, demographics, and race results. 
 
-### Interesting Insight (Optional)
-
+### Interesting Insight
+2023 was the 127th edition of the Boston Marathon and it was a very speical year for the runners with records being broken in the wheel-chair divison. 
 <img width="169" height="319" alt="Screenshot 2026-04-23 at 16 30 29" src="https://github.com/user-attachments/assets/faac1836-2b0f-43ae-803f-975d14d22eb5" />
 
 ## Data Sources and Acknowledgements
