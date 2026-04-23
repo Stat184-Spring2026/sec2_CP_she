@@ -1,5 +1,5 @@
 #Load Data set 
-boston_marathon_2023 <- read.csv("/Users/helly2103/Desktop/STAT 184/SecCPshe/boston_marathon_2023.csv")
+boston_marathon_2023 <- read.csv("~/Desktop/boston_marathon_2023.csv")
 
 ## Step One: Load package
 library(tidyverse)
