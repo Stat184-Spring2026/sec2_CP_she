@@ -1,11 +1,11 @@
-#Load Data set 
-boston_marathon_2023 <- read.csv("~/Desktop/boston_marathon_2023.csv")
-
 ## Step One: Load package
 library(tidyverse)
 
+#Load Data set
+boston_marathon_2023 <- read.csv("https://data.scorenetwork.org/data/boston_marathon_2023.csv")
+
 # Step Two: Clean and prepare data
-runners_clean <- runners |>
+runners_clean <- boston_marathon_2023 |>
   mutate(
     age_group = str_trim(age_group),
     gender = str_to_title(gender),
