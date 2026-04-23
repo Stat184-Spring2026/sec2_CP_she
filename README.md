@@ -16,7 +16,7 @@ The Boston Marathon Runners Dataset can be found here: https://data.scorenetwork
 
 ## Current Plan
 
-Our intetnion is to examine runner's performances, demogrpahics, and race results by transforming the raw dataset into a clean datset. We will dive deeper into the informaiton to make purposeful compairsons. 
+Our plan is to examine runner's performances, demogrpahics, and race results by transforming the raw dataset into a clean datset. We will dive deeper into the informaiton to make purposeful compairsons. We will use stratgies learned throughout the course (such a wrangling and cleaning) to make the data useful for insight and data analysis. 
 
 ## Repo Structure
 
