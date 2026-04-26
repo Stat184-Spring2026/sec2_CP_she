@@ -1,0 +1,274 @@
+---
+title: "2023 Boston Marathon Runners Dataset Analysis"
+author: "Shreya Chandanshive, Eszter Badescu, & Helly Patel"
+date: "April 25, 2026"
+date-modified: now
+format: 
+  pdf: 
+    toc: false
+    number-sections: true
+    number-depth: 5
+    fig-align: center
+    cap-location: top
+    geometry: 
+      - top=1in
+      - left=1in
+      - right=1in
+      - bottom=1in
+    colorlinks: true
+execute: 
+  echo: false
+  warning: false
+---
+
+The Boston Marathon is an annual road race held in Boston, Massachusetts, and is one of the most well-known and historic marathons in the world. Each year, thousands of runners from different age groups, genders, backgrounds, and experience levels participate in the race. Some runners compete at an elite level, while others run to achieve personal goals, qualify for future races, or complete a major athletic challenge. Because of this wide range of participants, the 2023 Boston Marathon results provide a valuable opportunity to examine patterns in runner performance. By analyzing finish times, age groups, gender divisions, and placement rankings, this project explores how performance varies across different groups of runners. The goal of this analysis is to better understand the overall distribution of race times, compare performance trends between men and women, and investigate how age may relate to marathon completion time.
+
+The dataset used in this project is titled boston_marathon_2023.csv and contains information on runners who completed the 2023 Boston Marathon. The dataset includes 26,598 rows and 15 columns, where each row represents one individual runner. The variables include demographic information such as age group and gender, ranking information such as overall place, gender place, and division place, and timing information such as half-marathon time, net finish time, gun finish time, and their converted values in seconds or minutes. These variables make it possible to summarize runner participation, compare finishing times across groups, and identify broader performance patterns within the race results. Overall, this dataset provides a useful real-world example for practicing data cleaning, wrangling, exploratory data analysis, and visualization in R.
+
+**Boston Marathon Dataset Tables**
+
+```{r}
+# Step Two: Load packages
+suppressPackageStartupMessages({
+  library(tidyverse)
+})
+
+# Step Three: Read in the dataset
+boston <- read_csv("/Users/shreyachandanshive/Desktop/STAT184/boston_marathon_2023.csv")
+
+# Step Four: Look at the column names
+names(boston)
+
+# Step Five: Clean and wrangle the data
+boston_clean <- boston |>
+  select(
+    age_group,
+    gender,
+    place_overall,
+    place_gender,
+    place_division,
+    name,
+    finish_net,
+    finish_gun,
+    finish_net_sec,
+    finish_gun_sec,
+    finish_net_minutes
+  ) |>
+  filter(
+    !is.na(age_group),
+    !is.na(gender),
+    !is.na(finish_net_minutes)
+  ) |>
+  mutate(
+    gender = str_to_upper(gender),
+    age_group = factor(age_group)
+  )
+
+# Step Six: Preview the cleaned data
+head(boston_clean)
+glimpse(boston_clean)
+
+# Step Seven: Create summary table by gender
+gender_summary <- boston_clean |>
+  group_by(gender) |>
+  summarize(
+    runners = n(),
+    mean_time = mean(finish_net_minutes),
+    median_time = median(finish_net_minutes),
+    min_time = min(finish_net_minutes),
+    max_time = max(finish_net_minutes),
+    .groups = "drop"
+  )
+
+gender_summary
+
+# Step Eight: Create summary table by age group
+age_summary <- boston_clean |>
+  group_by(age_group) |>
+  summarize(
+    runners = n(),
+    mean_time = mean(finish_net_minutes),
+    median_time = median(finish_net_minutes),
+    min_time = min(finish_net_minutes),
+    max_time = max(finish_net_minutes),
+    .groups = "drop"
+  )
+
+age_summary
+
+# Step Nine: Create summary table by age group and gender
+age_gender_summary <- boston_clean |>
+  group_by(age_group, gender) |>
+  summarize(
+    runners = n(),
+    mean_time = mean(finish_net_minutes),
+    median_time = median(finish_net_minutes),
+    .groups = "drop"
+  )
+
+age_gender_summary
+```
+
+## Distribution of Boston Marathon Finish times Plot
+```{r}
+# Graph One: Histogram of finish times
+ggplot(boston_clean, aes(x = finish_net_minutes)) +
+  geom_histogram(bins = 40) +
+  labs(
+    title = "Distribution of Boston Marathon Finish Times",
+    x = "Net Finish Time (Minutes)",
+    y = "Count"
+  )
+```
+
+**Alt text:**
+
+Histogram showing the distribution of Boston Marathon finish times, peaking around 200-250 minutes.
+
+**Narrative Text:**
+
+This histogram shows the distribution of net finish times for runners who completed the 2023 Boston Marathon. The x-axis represents each runner’s net finish time in minutes, while the y-axis shows the number of runners who finished within each time range. Overall, the distribution is right-skewed, meaning that most runners finished in the lower-to-middle range of times, while a smaller number of runners took much longer to complete the race. The highest concentration of runners finished around 190 to 220 minutes, or roughly 3 hours and 10 minutes to 3 hours and 40 minutes. After this peak, the number of runners gradually decreases as finish times increase, creating a long tail toward slower finish times. This suggests that while many Boston Marathon runners completed the race within a fairly competitive time range, there was still a wide spread in performance across all participants. The plot highlights the diversity of runner ability and experience in the race, from elite and highly competitive runners to participants who finished at a slower pace.
+
+**Long Description:**
+
+The image is a histogram depicting the distribution of Boston Marathon finish times. The chart is set against a light gray grid. The x-axis is labeled "Net Finish Time (Minutes)" and ranges from 0 to 400 minutes. The y-axis is labeled "Count" and ranges from 0 to 2500. The histogram bars are dark gray, with the central bars reaching the peak, indicating the most common finish times are around 200-250 minutes. The distribution shows a left skew, tapering off towards the higher finish times.
+
+## Boston Marathon Finish Times by Gender Plot
+
+```{r}
+# Graph Two: Boxplot of finish times by gender
+ggplot(boston_clean, aes(x = gender, y = finish_net_minutes)) +
+  geom_boxplot() +
+  labs(
+    title = "Boston Marathon Finish Times by Gender",
+    x = "Gender",
+    y = "Net Finish Time (Minutes)"
+  )
+```
+
+**Alt Text:**
+
+Box plot comparing Boston Marathon finish times by gender, showing data for men and women.
+
+**Narrative Text:**
+
+This boxplot compares the net finish times of male and female runners in the 2023 Boston Marathon. The x-axis separates runners by gender, while the y-axis shows net finish time in minutes. Overall, the plot shows that male runners tended to have faster finish times than female runners. The median finish time for men appears to be around 200 minutes, while the median finish time for women is higher, around 225 minutes. This means that the typical male runner finished the marathon faster than the typical female runner in this dataset.
+
+The spread of finish times is also slightly different between the two groups. The women’s box is positioned higher on the graph, showing that their middle range of finish times was generally slower compared to the men’s middle range. Both groups have many outliers above the main box, meaning there were runners in each gender group who took much longer than the majority of participants to finish. However, both men and women also show a wide range of performances, from very fast runners to much slower finishers. Overall, the plot suggests that gender is associated with differences in finish time, with men generally recording lower net finish times, but with substantial variation within both groups.
+
+**Long Description:**
+
+The image is a box plot comparing Boston Marathon finish times by gender. The plot features two vertical box plots side by side on a graph with a horizontal gray background. The y-axis is labeled "Net Finish Time (Minutes)" and ranges from 100 to 500 minutes with intervals of 100. On the x-axis, "Gender" is labeled, with "M" for men on the left and "W" for women on the right. Each box plot shows median finish times with bold horizontal lines and presents the interquartile ranges inside the boxes. Vertical lines extend from the boxes to represent variability outside the upper and lower quartiles, ending at small horizontal lines. Several dots beyond the whiskers indicate outliers in the data for both genders. The title at the top reads "2 Boston Marathon Finish Times by Gender Plot," and a subtitle below states "Boston Marathon Finish Times by Gender."
+
+
+## Boston Marathon Finish Times by Age Group 
+
+```{r}
+# Graph Three: Boxplot of finish times by age group
+ggplot(boston_clean, aes(x = age_group, y = finish_net_minutes)) +
+  geom_boxplot() +
+  labs(
+    title = "Boston Marathon Finish Times by Age Group",
+    x = "Age Group",
+    y = "Net Finish Time (Minutes)"
+  )
+```
+
+**Alt Text:**
+
+Box plot showing Boston Marathon finish times by age group from "18–39" to "80+."
+
+**Narrative Text:**
+
+This boxplot shows how net finish times vary across age groups in the 2023 Boston Marathon. Overall, there is a clear upward trend: as age increases, finish times generally become slower. The youngest group, ages 18–39, has one of the lowest median finish times, around 200 minutes, while older age groups show higher median times. The increase is gradual through the middle age groups, then becomes more noticeable in the 60+ categories.
+
+There are also many outliers in nearly every age group, showing that some runners finished much slower than the majority of their group. The oldest groups, especially 75–79 and 80+, have fewer runners, so their results may be less stable. Overall, the plot suggests that age is related to marathon performance, with older runners generally having longer finish times.
+
+**Long Description:**
+
+The image is a box plot chart titled "Boston Marathon Finish Times by Age Group," displaying marathon finish times across various age groups. The x-axis represents age groups ranging from "18–39" to "80+," while the y-axis indicates net finish time in minutes, ranging from 200 to 400. Each age group is represented by a box plot, with a central line denoting the median finish time. The plots show data spread with whiskers extending to the minimum and maximum finish times, while outliers are depicted as individual points. The chart indicates a gradual increase in median finish times as age groups increase.
+
+
+## Finish Times by Age Group and Gender 
+
+```{r}
+# Graph Four: Boxplot of finish times by age group and gender
+ggplot(boston_clean, aes(x = age_group, y = finish_net_minutes, fill = gender)) +
+  geom_boxplot() +
+  labs(
+    title = "Finish Times by Age Group and Gender",
+    x = "Age Group",
+    y = "Net Finish Time (Minutes)"
+  )
+```
+
+**Alt Text:**
+
+Box plot of marathon finish times by age group and gender, showing slower times with increasing age.
+
+**Narrative Text:**
+
+This boxplot compares Boston Marathon net finish times by both age group and gender. Overall, finish times increase as age group increases, meaning older runners generally had slower completion times. Within most age groups, men tended to have lower median finish times than women, especially in the younger and middle age categories. However, both genders show a wide range of results, with many outliers representing runners who finished much slower than the majority of their group. The oldest age groups have fewer runners, so their patterns are less consistent, but the overall trend still shows that age and gender are both related to marathon finish time.
+
+**Long Description:**
+
+The image is a box plot chart illustrating marathon finish times by age group and gender. The x-axis represents age groups in ten-year intervals from 18-39 to 80+, while the y-axis shows net finish time in minutes, ranging from 200 to 400. Each age group is divided into two categories: men (red boxes) and women (blue boxes). The boxes show the interquartile range with median lines, and the whiskers represent variability outside the upper and lower quartiles. Numerous black dots scattered above certain boxes indicate outliers. As age increases, the finish times generally rise, indicating slower performance with age. The legend on the right labels the colors for gender categories.
+
+
+## Average Finish Time by Age Group and Gender 
+```{r}
+# Graph Five: Mean finish time by age group and gender
+ggplot(age_gender_summary, aes(x = age_group, y = mean_time, group = gender, color = gender)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = "Average Finish Time by Age Group and Gender",
+    x = "Age Group",
+    y = "Average Net Finish Time (Minutes)"
+  )
+```
+
+**Alt Text:**
+
+Line graph of average finish time by age group and gender, showing increasing times with age, with women generally having longer times than men.
+
+**Narrative Text:**
+
+This line plot shows the average net finish time for Boston Marathon runners by age group and gender. Overall, the graph shows that average finish times increase as age group increases, meaning older runners generally took longer to complete the race. Men had lower average finish times than women in most age groups, especially from 18–39 through 70–74. However, the gap between men and women becomes smaller in the oldest age groups, particularly around 75–79, where their average finish times are almost the same. The 80+ group shows the highest average finish times overall, but this group likely has fewer runners, so the pattern should be interpreted carefully. Overall, the plot suggests that both age and gender are connected to marathon performance, with age showing a strong upward trend in average finish time.
+
+**Long Description:**
+
+The image is a line graph illustrating the average finish time by age group and gender. The x-axis represents age groups, ranging from 18-39 to 80+, while the y-axis shows the average net finish time in minutes, ranging from 200 to 300. Two lines represent different genders: a red line with circular markers for men (M) and a teal line with circular markers for women (W). Both lines show an upward trend, indicating longer finish times with increasing age. The teal line for women generally sits above the red line for men across the age groups, suggesting women tend to have longer finish times in each group. The graph background consists of light grey grid lines for reference points.
+
+## Number of Runners by Age Group and Gender
+```{r}
+# Graph Six: Count of runners by age group and gender
+ggplot(boston_clean, aes(x = age_group, fill = gender)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Number of Runners by Age Group and Gender",
+    x = "Age Group",
+    y = "Count"
+  )
+```
+
+**Alt Text:**
+
+Bar chart of runners by age group and gender, showing more runners in younger age groups.
+
+**Narrative Text:**
+
+This bar chart shows the number of Boston Marathon runners in each age group, separated by gender. The largest group of participants is the 18–39 age group, with both men and women having much higher counts than any other category. After this group, the number of runners steadily decreases as age increases. Men outnumber women in every age group shown, with the gap becoming more noticeable in the middle and older age categories. The oldest groups, especially 75–79 and 80+, have very few runners compared to the younger groups. Overall, this plot shows that participation is highest among younger runners and gradually declines with age, while male runners make up a larger share of participants across all age groups.
+
+**Long Description:**
+
+The image is a bar chart titled "Number of Runners by Age Group and Gender." The chart features two colored bars for each age group, representing male and female runners. The x-axis lists age groups in five-year intervals from 18-39 to 80+, and the y-axis indicates the count of runners, with increments of 2000 up to 4000. The bars show a decrease in the number of runners as age increases. The male runners are depicted in red, while female runners are shown in teal. The 18-39 age group has the highest number of runners, with both male and female counts exceeding 4000. The numbers decrease steadily with age.
+
+# Code Appendix
+```{r}
+#| label: codeAppend
+#| ref-label: !expr knitr::all_labels()
+#| echo: true
+#| eval: false
+
+```
