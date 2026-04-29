@@ -28,6 +28,8 @@ The dataset used in this project is titled boston_marathon_2023.csv and contains
 **Boston Marathon Dataset Tables**
 
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Step Two: Load packages
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -111,6 +113,8 @@ age_gender_summary
 
 ## Distribution of Boston Marathon Finish times Plot
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph One: Histogram of finish times
 ggplot(boston_clean, aes(x = finish_net_minutes)) +
   geom_histogram(bins = 40) +
@@ -136,6 +140,8 @@ The image is a histogram depicting the distribution of Boston Marathon finish ti
 ## Boston Marathon Finish Times by Gender Plot
 
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph Two: Boxplot of finish times by gender
 ggplot(boston_clean, aes(x = gender, y = finish_net_minutes)) +
   geom_boxplot() +
@@ -164,6 +170,8 @@ The image is a box plot comparing Boston Marathon finish times by gender. The pl
 ## Boston Marathon Finish Times by Age Group 
 
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph Three: Boxplot of finish times by age group
 ggplot(boston_clean, aes(x = age_group, y = finish_net_minutes)) +
   geom_boxplot() +
@@ -192,6 +200,8 @@ The image is a box plot chart titled "Boston Marathon Finish Times by Age Group,
 ## Finish Times by Age Group and Gender 
 
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph Four: Boxplot of finish times by age group and gender
 ggplot(boston_clean, aes(x = age_group, y = finish_net_minutes, fill = gender)) +
   geom_boxplot() +
@@ -217,6 +227,8 @@ The image is a box plot chart illustrating marathon finish times by age group an
 
 ## Average Finish Time by Age Group and Gender 
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph Five: Mean finish time by age group and gender
 ggplot(age_gender_summary, aes(x = age_group, y = mean_time, group = gender, color = gender)) +
   geom_line() +
@@ -242,6 +254,8 @@ The image is a line graph illustrating the average finish time by age group and 
 
 ## Number of Runners by Age Group and Gender
 ```{r}
+#Primary Author: Shreya Chandanshive
+#Peers who reviewed: Helly Patel and Eszter Badescu
 # Graph Six: Count of runners by age group and gender
 ggplot(boston_clean, aes(x = age_group, fill = gender)) +
   geom_bar(position = "dodge") +
@@ -263,6 +277,11 @@ This bar chart shows the number of Boston Marathon runners in each age group, se
 **Long Description:**
 
 The image is a bar chart titled "Number of Runners by Age Group and Gender." The chart features two colored bars for each age group, representing male and female runners. The x-axis lists age groups in five-year intervals from 18-39 to 80+, and the y-axis indicates the count of runners, with increments of 2000 up to 4000. The bars show a decrease in the number of runners as age increases. The male runners are depicted in red, while female runners are shown in teal. The 18-39 age group has the highest number of runners, with both male and female counts exceeding 4000. The numbers decrease steadily with age.
+
+## Author Contribution
+- Shreya Chandanshive
+- Eszter Badescu
+- Helly Patel
 
 # Code Appendix
 ```{r}
